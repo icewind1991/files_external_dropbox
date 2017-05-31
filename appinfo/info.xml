@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<info>
+    <id>files_external_dropbox</id>
+    <name>Dropbox storage support</name>
+    <description>Dropbox backend for files_external</description>
+    <licence>AGPL</licence>
+    <author>Hemant Mann</author>
+    <version>0.0.1</version>
+    <category>external-plugins</category>
+    <types>
+        <filesystem/>
+    </types>
+
+    <dependencies>
+        <owncloud min-version="10.0" max-version="10.0"/>
+    </dependencies>
+    <website>https://github.com/owncloud/files_external_dropbox/</website>
+    <bugs>https://github.com/owncloud/files_external_dropbox/issues</bugs>
+    <repository type="git">https://github.com/owncloud/files_external_dropbox.git</repository>
+</info>
