@@ -1,0 +1,5 @@
+{
+  "require": {
+    "hemant-mann/flysystem-dropbox": "^1.0"
+  }
+}
