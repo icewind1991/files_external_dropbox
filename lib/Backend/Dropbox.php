@@ -15,15 +15,12 @@ class Dropbox extends Backend {
      */
     public function __construct(IL10N $l) {
         $this
-            ->setIdentifier('dropbox')
+            ->setIdentifier('files_external_dropbox')
+            ->addIdentifierAlias('\OC\Files\External_Storage\Dropbox') // legacy compat
             ->setStorageClass('\OCA\Files_external_dropbox\Storage\Dropbox')
             ->setText($l->t('Dropbox (Fly)'))
             ->addParameters([
-                (new DefinitionParameter('client_id', $l->t('Client ID'))),
-                (new DefinitionParameter('client_secret', $l->t('Client Secret')))
-                    ->setType(DefinitionParameter::VALUE_PASSWORD),
-                (new DefinitionParameter('token', $l->t('Token')))
-                    ->setFlag(DefinitionParameter::VALUE_HIDDEN)
+                // all parameters handled in OAuth2 mechanism
             ])
             ->addAuthScheme(AuthMechanism::SCHEME_OAUTH2);
     }

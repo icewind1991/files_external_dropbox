@@ -1,6 +1,7 @@
 <?php
 
 namespace OCA\Files_external_dropbox\Storage;
+require_once dirname(dirname(__DIR__)) . '/vendor/autoload.php';
 
 use Kunnu\Dropbox\DropboxApp;
 use Kunnu\Dropbox\Dropbox as DropboxClient;
@@ -48,6 +49,24 @@ class Dropbox extends FlysystemStorageAdapter {
      * @return string
      */
     public function getId() {
-        return 'dropbox::' . $this->clientId . ':' . $this->clientSecret . '/' . $this->root;
+        return 'dropbox_external::' . $this->clientId . ':' . $this->clientSecret . '/' . $this->root;
+    }
+
+    public function file_exists($path) {
+        if ($path == '' || $path == '/') {
+            return true;
+        }
+        return parent::file_exists($path);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function test() {
+        $obj = $this->adapter->getClient()->getCurrentAccount();
+        if ($obj && $obj->getAccountId()) {
+            return true;
+        }
+        return false;
     }
 }
