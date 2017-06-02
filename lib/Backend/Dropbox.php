@@ -20,9 +20,12 @@ class Dropbox extends Backend {
             ->setStorageClass('\OCA\Files_external_dropbox\Storage\Dropbox')
             ->setText($l->t('Dropbox (Fly)'))
             ->addParameters([
-                // all parameters handled in OAuth2 mechanism
+                (new DefinitionParameter('client_id', $l->t('Client ID'))),
+                (new DefinitionParameter('client_secret', $l->t('Client Secret')))
+                    ->setType(DefinitionParameter::VALUE_PASSWORD),
+                (new DefinitionParameter('token', $l->t('Token')))
             ])
-            ->addAuthScheme(AuthMechanism::SCHEME_OAUTH2);
+            ->addAuthScheme(AuthMechanism::SCHEME_BUILTIN);
     }
 
 }
