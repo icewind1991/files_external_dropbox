@@ -19,6 +19,5 @@
  *
  */
 
-require_once dirname(__DIR__) . '/vendor/autoload.php';
-
-$app = new \OCA\Files_external_dropbox\AppInfo\Application();
+$this->create('files_external_dropbox', 'ajax/oauth2.php')
+	->actionInclude('files_external_dropbox/ajax/oauth2.php');

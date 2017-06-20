@@ -1,6 +1,6 @@
 <?php
 /**
-* @author Hemant Mann <hemant.mann121@gmail.com>
+ * @author Hemant Mann <hemant.mann121@gmail.com>
  *
  * @copyright Copyright (c) 2017, ownCloud GmbH.
  * @license AGPL-3.0

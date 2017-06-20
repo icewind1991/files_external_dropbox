@@ -1,6 +1,6 @@
 <?php
 /**
-* @author Hemant Mann <hemant.mann121@gmail.com>
+ * @author Hemant Mann <hemant.mann121@gmail.com>
  *
  * @copyright Copyright (c) 2017, ownCloud GmbH.
  * @license AGPL-3.0
@@ -24,6 +24,9 @@ namespace OCA\Files_external_dropbox\AppInfo;
 use OCP\AppFramework\App;
 use OCP\Files\External\Config\IBackendProvider;
 
+/**
+ * @package OCA\Files_external_dropbox\AppInfo
+ */
 class Application extends App implements IBackendProvider {
 
     public function __construct(array $urlParams = []) {
