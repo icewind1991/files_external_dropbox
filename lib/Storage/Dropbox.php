@@ -47,7 +47,9 @@ class Dropbox extends FlysystemStorageAdapter {
      * @throws \Exception
      */
     public function __construct($params) {
-        if (isset($params['client_id']) && isset($params['client_secret']) && isset($params['token'])) {
+        if (isset($params['client_id']) && isset($params['client_secret']) && isset($params['token'])
+            && isset($params['configured']) && $params['configured'] == 'true'
+        ) {
             $this->clientId = $params['client_id'];
             $this->clientSecret = $params['client_secret'];
             $this->accessToken = $params['token'];
