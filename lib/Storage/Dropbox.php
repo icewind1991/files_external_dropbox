@@ -80,7 +80,7 @@ class Dropbox extends FlysystemStorageAdapter {
     }
 
     public function filemtime($path) {
-        if ($path === '' || $path === '/') {
+        if ($path === '' || $path === '/' || $path === '.') {
             return 0;
         }
         return parent::filemtime($path);
