@@ -81,11 +81,29 @@ class Dropbox extends FlysystemStorageAdapter {
         return parent::file_exists($path);
     }
 
-    public function filemtime($path) {
-        if ($path === '' || $path === '/' || $path === '.') {
-            return 0;
+    protected function getLargest($arr, $default = 0) {
+        if (count($arr) === 0) {
+            return $default;
         }
-        return parent::filemtime($path);
+        arsort($arr);
+        return array_values($arr)[0];
+    }
+
+    public function filemtime($path) {
+        if ($this->is_dir($path)) {
+            if ($path === '.' || $path === '') {
+                $path = "/";
+            }
+            $arr = [];
+            $contents = $this->flysystem->listContents($path, true);
+            foreach ($contents as $c) {
+                $arr[] = $c['type'] === 'file' ? $c['timestamp'] : 0;
+            }
+            $mtime = $this->getLargest($arr);
+            return $mtime;
+        } else {
+            return parent::filemtime($path);
+        }
     }
 
     public function stat($path) {
