@@ -23,14 +23,56 @@
 
 namespace Test\Files_external_dropbox;
 
+use Prophecy\Argument;
 use Test\Files\Storage\Storage;
+use Kunnu\Dropbox\Models\Account as AccountModel;
 
 class Dropbox extends Storage {
     private $config;
 
-    protected function setUp() {
-        parent::setUp();
+    protected $flysystem;
 
+    protected function setUp() {
         $this->config = json_decode(file_get_contents('./config.json'), true);
+
+        $this->flysystem = $this->prophesize('League\Flysystem\Filesystem');
+        $this->instance = new \OCA\Files_external_dropbox\Storage\Dropbox($this->config);
+        $this->instance->setFlysystem($this->flysystem->reveal());
+        parent::setUp();
     }
+
+    private function folderResponse($path = '/') {
+		return [ 'path' => $path, 'type' => 'dir', 'timestamp' => 0 ];
+    }
+
+	public function testTestFunction() {
+		$mockAdapter = $this->prophesize('OCA\Files_external_dropbox\Storage\Adapter');
+		$this->instance->setAdapter($mockAdapter->reveal());
+
+		$mockClient = $this->prophesize('Kunnu\Dropbox\Dropbox');
+		$mockAdapter->getClient()->willReturn($mockClient->reveal());
+		$mockClient->getCurrentAccount()->willReturn(new AccountModel(['account_id' => 1]));
+		parent::testTestFunction();
+	}
+
+	/**
+	 * @dataProvider directoryProvider
+	 */
+	public function testDirectories($directory) {
+		$this->flysystem->has(Argument::type('string'))->willReturn(false);
+		$this->assertFalse($this->instance->file_exists('/' . $directory));
+
+		$this->flysystem->createDir(Argument::type('string'))->willReturn(true);
+		$this->assertTrue($this->instance->mkdir('/' . $directory));
+
+		$this->flysystem->has(Argument::type('string'))->willReturn(true);
+		$this->flysystem->getMetadata(Argument::type('string'))->willReturn($this->folderResponse());
+		$this->assertTrue($this->instance->file_exists('/' . $directory));
+		$this->assertTrue($this->instance->is_dir('/' . $directory));
+		$this->assertFalse($this->instance->is_file('/' . $directory));
+		$this->assertEquals('dir', $this->instance->filetype('/' . $directory));
+		$this->assertEquals(0, $this->instance->filesize('/' . $directory));
+		$this->assertTrue($this->instance->isReadable('/' . $directory));
+		$this->assertTrue($this->instance->isUpdatable('/' . $directory));
+	}
 }

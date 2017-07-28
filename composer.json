@@ -1,5 +1,16 @@
 {
-  "require": {
-    "hemant-mann/flysystem-dropbox": "^1.0"
-  }
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Hemant-Mann/dropbox-php-sdk"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/Hemant-Mann/flysystem-dropbox"
+        }
+    ],
+    "require": {
+        "kunalvarma05/dropbox-php-sdk": "dev-guzzle5",
+        "hemant-mann/flysystem-dropbox": "dev-guzzle5"
+    }
 }

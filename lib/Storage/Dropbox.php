@@ -45,6 +45,25 @@ class Dropbox extends FlysystemStorageAdapter {
     protected $accessToken;
 
     /**
+     * @var Adapter
+     */
+    protected $adapter;
+
+    /**
+     * Initialize the storage backend with a flyssytem adapter
+     * @override
+     * @param \League\Flysystem\Filesystem $fs
+     */
+    public function setFlysystem($fs) {
+        $this->flysystem = $fs;
+        $this->flysystem->addPlugin(new \League\Flysystem\Plugin\GetWithMetadata());
+    }
+
+    public function setAdapter($adapter) {
+        $this->adapter = $adapter;
+    }
+
+    /**
      * Dropbox constructor.
      * @throws \Exception
      */
@@ -114,7 +133,7 @@ class Dropbox extends FlysystemStorageAdapter {
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function test() {
         $obj = $this->adapter->getClient()->getCurrentAccount();
