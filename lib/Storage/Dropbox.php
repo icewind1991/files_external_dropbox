@@ -50,6 +50,13 @@ class Dropbox extends FlysystemStorageAdapter {
     protected $adapter;
 
     /**
+     * @var Adapter
+     */
+    protected $flysystem;
+
+    protected $cacheFilemtime = [];
+
+    /**
      * Initialize the storage backend with a flyssytem adapter
      * @override
      * @param \League\Flysystem\Filesystem $fs
@@ -94,7 +101,7 @@ class Dropbox extends FlysystemStorageAdapter {
     }
 
     public function file_exists($path) {
-        if ($path == '' || $path == '/') {
+        if ($path == '' || $path == '/' || $path === '.') {
             return true;
         }
         return parent::file_exists($path);
@@ -113,16 +120,25 @@ class Dropbox extends FlysystemStorageAdapter {
             if ($path === '.' || $path === '') {
                 $path = "/";
             }
+
+            if ($this->cacheFilemtime && isset($this->cacheFilemtime[$path])) {
+                return $this->cacheFilemtime[$path];
+            }
+
             $arr = [];
             $contents = $this->flysystem->listContents($path, true);
             foreach ($contents as $c) {
                 $arr[] = $c['type'] === 'file' ? $c['timestamp'] : 0;
             }
             $mtime = $this->getLargest($arr);
-            return $mtime;
         } else {
-            return parent::filemtime($path);
+            if ($this->cacheFilemtime && isset($this->cacheFilemtime[$path])) {
+                return $this->cacheFilemtime[$path];
+            }
+            $mtime = parent::filemtime($path);
         }
+        $this->cacheFilemtime[$path] = $mtime;
+        return $mtime;
     }
 
     public function stat($path) {

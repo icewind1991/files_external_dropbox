@@ -11,6 +11,10 @@
         <filesystem/>
     </types>
 
+    <background-jobs>
+        <job>OCA\Files_external_dropbox\BackgroundJob\MetaData</job>
+    </background-jobs>
+
     <dependencies>
         <owncloud min-version="10.0" max-version="10.0"/>
     </dependencies>
