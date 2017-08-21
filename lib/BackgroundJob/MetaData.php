@@ -41,6 +41,8 @@ class MetaData extends TimedJob {
     private $dbConnection;
     /** @var ILogger */
     private $logger;
+    /** Amount of users that should get scanned per execution */
+    const USERS_PER_SESSION = 500;
 
     private $appName = 'files_external_dropbox';
 
@@ -55,8 +57,7 @@ class MetaData extends TimedJob {
                                 IDBConnection $dbConnection = null,
                                 ILogger $logger = null) {
         // Run once per 10 minutes
-        $this->setInterval(60 * 10);
-
+        $this->setInterval(1);
         if (is_null($userManager) || is_null($config)) {
             $this->fixDIForJobs();
         } else {
@@ -72,7 +73,45 @@ class MetaData extends TimedJob {
         $this->logger = \OC::$server->getLogger();
     }
 
+    protected function syncStorage(\OC\Files\External\StorageConfig $storageConfig) {
+        $opts = $storageConfig->getBackendOptions();
+        if ($opts['configured'] == 'false') {
+            return false;
+        }
+        try {
+            $storage = new \OCA\Files_external_dropbox\Storage\Dropbox($opts);
+            $key = 'dropbox_cursor_storage_' . $storageConfig->getId();
+
+            $cursor = $this->config->getAppValue($this->appName, $key, null);
+            if ($cursor && $isUpdated = $storage->isStorageUpdated($cursor)) {
+                $directories = $storage->getModifiedPaths($cursor);
+                foreach ($directories as $directory) {
+                   $result = $storage->getScanner($directory)->scan($directory, true);
+                }
+                $cursor = $storage->getLatestCursor();
+            } else {
+                $cursor = $storage->getLatestCursor();
+                $storage->getScanner('/')->scan('/', true);
+            }
+            $this->config->setAppValue($this->appName, $key, $cursor);
+        } catch (\Exception $e) {
+            $this->logger->logException($e, ['message' => 'Storage Syncing failed for ' . $storageConfig->getId()]);
+        }
+    }
+
     public function run($argument) {
-        
+        $service = \OC::$server->getGlobalStoragesService();
+        $resp = $service->getAllStorages();
+        $result = [];
+        foreach ($resp as $r) {
+            $data = $r->getBackend()->jsonSerialize();
+            if ($data['identifier'] == $this->appName) {
+                $result[] = $r;
+            }
+        }
+        foreach ($result as $r) {
+            $this->syncStorage($r);
+        }
+        return true;
     }
 }

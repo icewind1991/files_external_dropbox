@@ -148,6 +148,44 @@ class Dropbox extends FlysystemStorageAdapter {
         return parent::stat($path);
     }
 
+    public function getLatestCursor($path = '') {
+        try {
+            $dropbox = $this->adapter->getClient();
+            $resp = $dropbox->postToAPI('/files/list_folder/get_latest_cursor', ['path' => $path, 'recursive' => true, 'include_deleted' => true]);
+            $body = $resp->getDecodedBody();
+            if ($body) {
+                return $body['cursor'];
+            }
+        } catch (\Exception $e) {
+            // log it
+        }
+        return null;
+    }
+
+    public function isStorageUpdated($cursor) {
+        try {
+            $client = new \GuzzleHttp\Client();
+            $params = ['cursor' => $cursor, 'timeout' => 30];
+            $response = $client->post('https://notify.dropboxapi.com/2/files/list_folder/longpoll', ['json' => $params]);
+            $body = json_decode($response->getBody(), true);
+
+            if ($body && isset($body['changes'])) {
+                return $body['changes'];
+            }
+        } catch (\Exception $e) {
+            // log it
+        }
+        return true;
+    }
+
+    public function getModifiedPaths($cursor) {
+        $dropbox = $this->adapter->getClient();
+        $listFolderContinue = $dropbox->listFolderContinue($cursor);
+        $items = $listFolderContinue->getItems();
+
+        return $this->adapter->getModifiedFolders($items);
+    }
+
     /**
      * {@inheritDoc}
      */

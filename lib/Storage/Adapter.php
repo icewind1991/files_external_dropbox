@@ -34,4 +34,18 @@ class Adapter extends DropboxAdapter {
 		}
 		return $result;
 	}
+
+    public function getModifiedFolders($items) {
+	    $result = [];
+        foreach ($items as $item) {
+            $klass = get_class($item);
+            if ($klass == 'Kunnu\Dropbox\Models\FolderMetadata') {
+                $dirname = $item->getPathDisplay();
+            } else {
+                $dirname = dirname($item->getPathDisplay());
+            }
+            $result[] = $dirname;
+	    }
+	    return array_unique($result);
+    }
 }
