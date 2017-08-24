@@ -21,5 +21,10 @@
  *
  */
 
-$this->create('files_external_dropbox', 'ajax/oauth2.php')
-	->actionInclude('files_external_dropbox/ajax/oauth2.php');
+$app = new \OCA\Files_external_dropbox\AppInfo\Application();
+
+$app->registerRoutes($this, [
+	'routes' => [
+		['name' => 'oauth#receiveToken', 'url' => '/oauth', 'verb' => 'POST'],
+	],
+]);

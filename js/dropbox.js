@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	var backendId = 'files_external_dropbox';
-	var backendUrl = OC.generateUrl('apps/' + backendId + '/ajax/oauth2.php');
+	var backendUrl = OC.generateUrl('apps/' + backendId + '/oauth');
 
 	$('.configuration').on('oauth_step1', function (event, data) {
 		if (data['backend_id'] !== backendId) {
