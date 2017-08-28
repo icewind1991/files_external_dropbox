@@ -6,7 +6,7 @@ Requires ownCloud 10.0 or later
 ## Steps For Installation:
 - Get the code
 ```bash
-git clone https://github.com/Hemant-Mann/files_external_dropbox.git
+git clone
 cd files_external_dropbox
 composer install
 ```
@@ -14,3 +14,10 @@ composer install
 - Activate the app from settings page
 - Fill up the storage details
 - Fire up the files page to see the ```Dropbox``` mounted as external storage
+
+## Dependencies
+This app depends on the flysystem adapter for dropbox which can be found here [https://github.com/Hemant-Mann/flysystem-dropbox](https://github.com/Hemant-Mann/flysystem-dropbox)
+
+
+## Future Work
+- Update the Guzzle Dependency to ^6.0
