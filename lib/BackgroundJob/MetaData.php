@@ -75,7 +75,7 @@ class MetaData extends TimedJob {
 
     protected function syncStorage(\OC\Files\External\StorageConfig $storageConfig) {
         $opts = $storageConfig->getBackendOptions();
-        if ($opts['configured'] == 'false') {
+        if ($opts['configured'] === 'false') {
             return false;
         }
         try {
@@ -105,7 +105,7 @@ class MetaData extends TimedJob {
         $result = [];
         foreach ($resp as $r) {
             $data = $r->getBackend()->jsonSerialize();
-            if ($data['identifier'] == $this->appName) {
+            if ($data['identifier'] === $this->appName) {
                 $result[] = $r;
             }
         }

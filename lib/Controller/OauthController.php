@@ -59,12 +59,12 @@ class OauthController extends Controller {
 
 	/**
 	 * Create a storage from its parameters
-     * 
+	 * 
 	 * @param string $client_id
-     * @param string $client_secret
-     * @param string $redirect
-     * @param int $step
-     * @param string $code
+	 * @param string $client_secret
+	 * @param string $redirect
+	 * @param int $step
+	 * @param string $code
 	 * @return DataResponse
 	 */
     public function receiveToken(
@@ -104,7 +104,7 @@ class OauthController extends Controller {
 			}
 		}
 		return new DataResponse(
-			['data' => ['message' => 'Invalid Request Params!!']],
+			['data' => ['message' => $this->l10n->t('Invalid Request Params!!')]],
 			Http::STATUS_BAD_REQUEST
 		);
 	}

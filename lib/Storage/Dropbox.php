@@ -76,7 +76,7 @@ class Dropbox extends FlysystemStorageAdapter {
      */
     public function __construct($params) {
         if (isset($params['client_id']) && isset($params['client_secret']) && isset($params['token'])
-            && isset($params['configured']) && $params['configured'] == 'true'
+            && isset($params['configured']) && $params['configured'] === 'true'
         ) {
             $this->clientId = $params['client_id'];
             $this->clientSecret = $params['client_secret'];
@@ -97,11 +97,11 @@ class Dropbox extends FlysystemStorageAdapter {
      * @return string
      */
     public function getId() {
-        return 'dropbox_external::' . $this->clientId . ':' . $this->clientSecret . '/' . $this->root;
+        return 'dropbox_external::' . $this->clientId . '/' . $this->root;
     }
 
     public function file_exists($path) {
-        if ($path == '' || $path == '/' || $path === '.') {
+        if ($path === '' || $path === '/' || $path === '.') {
             return true;
         }
         return parent::file_exists($path);

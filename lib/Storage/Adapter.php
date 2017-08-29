@@ -23,6 +23,7 @@
 
 namespace OCA\Files_external_dropbox\Storage;
 
+use Kunnu\Dropbox\Models\FolderMetadata;
 use HemantMann\Flysystem\Dropbox\Adapter as DropboxAdapter;
 
 class Adapter extends DropboxAdapter {
@@ -38,8 +39,8 @@ class Adapter extends DropboxAdapter {
     public function getModifiedFolders($items) {
 	    $result = [];
         foreach ($items as $item) {
-            $klass = get_class($item);
-            if ($klass == 'Kunnu\Dropbox\Models\FolderMetadata') {
+        	$className = FolderMetadata::class;
+            if ($item instanceof $className) {
                 $dirname = $item->getPathDisplay();
             } else {
                 $dirname = dirname($item->getPathDisplay());
