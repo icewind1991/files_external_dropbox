@@ -39,7 +39,7 @@ class Dropbox extends Backend {
             ->setIdentifier('files_external_dropbox')
             ->addIdentifierAlias('\OC\Files\External_Storage\Dropbox') // legacy compat
             ->setStorageClass('\OCA\Files_external_dropbox\Storage\Dropbox')
-            ->setText($l->t('Dropbox (Fly)'))
+            ->setText($l->t('Dropbox'))
             ->addParameters([
                 
             ])
