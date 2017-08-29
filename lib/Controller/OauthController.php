@@ -67,15 +67,15 @@ class OauthController extends Controller {
 	 * @param string $code
 	 * @return DataResponse
 	 */
-    public function receiveToken(
-        $client_id,
-        $client_secret,
-        $redirect,
-        $step,
-        $code
-    ) {
-        $clientId = $client_id;
-        $clientSecret = $client_secret;
+	public function receiveToken(
+	$client_id,
+	$client_secret,
+	$redirect,
+	$step,
+	$code
+	) {
+		$clientId = $client_id;
+		$clientSecret = $client_secret;
 		if ($clientId !== null && $clientSecret !== null && $redirect !== null) {
 			$app = new \Kunnu\Dropbox\DropboxApp($clientId, $clientSecret);
 			$dropbox = new \Kunnu\Dropbox\Dropbox($app);
