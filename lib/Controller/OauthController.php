@@ -68,11 +68,11 @@ class OauthController extends Controller {
 	 * @return DataResponse
 	 */
 	public function receiveToken(
-	$client_id,
-	$client_secret,
-	$redirect,
-	$step,
-	$code
+		$client_id,
+		$client_secret,
+		$redirect,
+		$step,
+		$code
 	) {
 		$clientId = $client_id;
 		$clientSecret = $client_secret;
