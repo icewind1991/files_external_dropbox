@@ -29,6 +29,8 @@ use OCP\Files\Storage\FlysystemStorageAdapter;
 
 
 class Dropbox extends FlysystemStorageAdapter {
+    const APP_NAME = 'files_external_dropbox';
+
     /**
      * @var string
      */
@@ -53,6 +55,12 @@ class Dropbox extends FlysystemStorageAdapter {
      * @var Adapter
      */
     protected $flysystem;
+
+    /**
+     * Logger variable
+     * @var \OCP\ILogger
+     */
+    protected $logger;
 
     protected $cacheFilemtime = [];
 
@@ -91,6 +99,7 @@ class Dropbox extends FlysystemStorageAdapter {
         } else {
             throw new \Exception('Creating \OCA\Files_external_dropbox\Storage\Dropbox storage failed');
         }
+        $this->logger = \OC::$server->getLogger();
     }
 
     /**
@@ -157,7 +166,7 @@ class Dropbox extends FlysystemStorageAdapter {
                 return $body['cursor'];
             }
         } catch (\Exception $e) {
-            // log it
+            $this->logger->logException($e, ['app' => self::APP_NAME]);
         }
         return null;
     }
@@ -173,7 +182,7 @@ class Dropbox extends FlysystemStorageAdapter {
                 return $body['changes'];
             }
         } catch (\Exception $e) {
-            // log it
+            $this->logger->logException($e, ['app' => self::APP_NAME]);
         }
         return true;
     }
@@ -190,10 +199,15 @@ class Dropbox extends FlysystemStorageAdapter {
      * {@inheritDoc}
      */
     public function test() {
-        $obj = $this->adapter->getClient()->getCurrentAccount();
-        if ($obj && $obj->getAccountId()) {
-            return true;
+        try {
+            $obj = $this->adapter->getClient()->getCurrentAccount();
+            if ($obj && $obj->getAccountId()) {
+                return true;
+            }
+        } catch (\Exception $e) {
+            $this->logger->logException($e, ['app' => self::APP_NAME]);
         }
+        
         return false;
     }
 }

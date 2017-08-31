@@ -12,7 +12,7 @@ composer install
 ```
 - Move this folder ```files_external_dropbox``` to ```owncloud/apps```
 - Activate the app from settings page
-- Fill up the storage details
+- Fill up the storage details (See Below _Configuring OAuth2_)
 - Fire up the files page to see the ```Dropbox``` mounted as external storage
 
 ## Configuring OAuth2
@@ -23,6 +23,8 @@ composer install
 - Then Go to owncloud ```/settings/admin?sectionid=storage``` and Add a new storage **Dropbox**
 - Fill the details Client Id, Client Secrets from you Dropbox App page
 - Click Grant Access and then you will be redirected for OAuth login
+- After completing the OAuth you will be redirect back to Storage Section and you should see **green** mark along your storage configuration
+- That's it
 
 ## Dependencies
 This app depends on the flysystem adapter for dropbox which can be found here [https://github.com/Hemant-Mann/flysystem-dropbox](https://github.com/Hemant-Mann/flysystem-dropbox)
