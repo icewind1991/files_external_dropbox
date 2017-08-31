@@ -1,5 +1,5 @@
 OC.L10N.register(
-    "files_external_ftp",
+    "files_external_dropbox",
     {
         "Dropbox" : "Dropbox",
         "Client Id" : "Client Id",

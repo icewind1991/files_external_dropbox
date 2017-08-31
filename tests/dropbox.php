@@ -37,13 +37,13 @@ class Dropbox extends Storage {
     }
 
     public function directoryProvider() {
-		return [
-			['folder'],
-			[' folder'],
-			['folder with space'],
-			['spéciäl földer'],
-			['test single\'quote'],
-		];
+        return [
+            ['folder'],
+            [' folder'],
+            ['folder with space'],
+            ['spéciäl földer'],
+            ['test single\'quote'],
+        ];
 	}
 
     /**

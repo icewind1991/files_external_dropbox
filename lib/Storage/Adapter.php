@@ -37,16 +37,16 @@ class Adapter extends DropboxAdapter {
 	}
 
     public function getModifiedFolders($items) {
-	    $result = [];
-        foreach ($items as $item) {
-        	$className = FolderMetadata::class;
-            if ($item instanceof $className) {
-                $dirname = $item->getPathDisplay();
-            } else {
-                $dirname = dirname($item->getPathDisplay());
-            }
-            $result[] = $dirname;
-	    }
-	    return array_unique($result);
+		$result = [];
+		foreach ($items as $item) {
+			$className = FolderMetadata::class;
+			if ($item instanceof $className) {
+				$dirname = $item->getPathDisplay();
+			} else {
+				$dirname = dirname($item->getPathDisplay());
+			}
+			$result[] = $dirname;
+		}
+		return array_unique($result);
     }
 }
