@@ -73,6 +73,14 @@ class MetaData extends TimedJob {
         $this->logger = \OC::$server->getLogger();
     }
 
+    /**
+     * Get the storage configuration and sync the storage only if configured = true
+     * Instantiate new Dropbox Storage class, Check for the last stored cursor
+     * if found then check if the storage is updated and scan the modified folders
+     * else scan the whole storage
+     * @param  \OC\Files\External\StorageConfig $storageConfig
+     * @return boolean      True on success, False on failure
+     */
     protected function syncStorage(\OC\Files\External\StorageConfig $storageConfig) {
         $opts = $storageConfig->getBackendOptions();
         if ($opts['configured'] === 'false') {
@@ -96,7 +104,9 @@ class MetaData extends TimedJob {
             $this->config->setAppValue($this->appName, $key, $cursor);
         } catch (\Exception $e) {
             $this->logger->logException($e, ['message' => 'Storage Syncing failed for ' . $storageConfig->getId()]);
+            return false;
         }
+        return true;
     }
 
     public function run($argument) {
