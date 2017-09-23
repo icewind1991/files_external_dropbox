@@ -29,6 +29,7 @@ use HemantMann\Flysystem\Dropbox\Adapter as DropboxAdapter;
 class Adapter extends DropboxAdapter {
 	protected function normalizeResponse($obj) {
 		$result = parent::normalizeResponse($obj);
+		$result['path'] = strtolower($result['path']);
 
 		if ($result['type'] === 'dir') {
 			$result['timestamp'] = 0;
@@ -36,7 +37,7 @@ class Adapter extends DropboxAdapter {
 		return $result;
 	}
 
-    public function getModifiedFolders($items) {
+	public function getModifiedFolders($items) {
 		$result = [];
 		foreach ($items as $item) {
 			$className = FolderMetadata::class;
@@ -48,5 +49,5 @@ class Adapter extends DropboxAdapter {
 			$result[] = $dirname;
 		}
 		return array_unique($result);
-    }
+	}
 }

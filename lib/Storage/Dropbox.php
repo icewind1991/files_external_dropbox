@@ -28,7 +28,7 @@ use Kunnu\Dropbox\Dropbox as DropboxClient;
 use OCP\Files\Storage\FlysystemStorageAdapter;
 
 
-class Dropbox extends FlysystemStorageAdapter {
+class Dropbox extends CacheableFlysystemAdapter {
     const APP_NAME = 'files_external_dropbox';
 
     /**
@@ -50,6 +50,12 @@ class Dropbox extends FlysystemStorageAdapter {
      * @var Adapter
      */
     protected $adapter;
+
+    /**
+     * This property is used to check whether the storage is case insensitive or not
+     * @var boolean
+     */
+    protected $isCaseInsensitiveStorage = true;
 
     /**
      * @var Adapter

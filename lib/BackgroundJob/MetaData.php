@@ -94,12 +94,12 @@ class MetaData extends TimedJob {
             if ($cursor && $isUpdated = $storage->isStorageUpdated($cursor)) {
                 $directories = $storage->getModifiedPaths($cursor);
                 foreach ($directories as $directory) {
-                   $result = $storage->getScanner($directory)->scan($directory, true);
+                   $result = $storage->getScanner()->scan($directory, true);
                 }
                 $cursor = $storage->getLatestCursor();
             } else {
                 $cursor = $storage->getLatestCursor();
-                $storage->getScanner('/')->scan('/', true);
+                $storage->getScanner()->scan('/', true);
             }
             $this->config->setAppValue($this->appName, $key, $cursor);
         } catch (\Exception $e) {
