@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<info>
+    <id>files_external_dropbox</id>
+    <name>Dropbox storage support</name>
+    <description>Dropbox backend for files_external</description>
+    <summary>This is storage app to mount Dropbox as an External Storage in ownCloud</summary>
+    <licence>GPL-2.0</licence>
+    <author>Hemant Mann</author>
+    <version>1.0.0</version>
+    <category>storage</category>
+    <screenshot>https://raw.githubusercontent.com/owncloud/promo/e1dd604d66b4c5f765579b4c160de3268169ea3c/ownCloud%20logo%20square.png</screenshot>
+    <types>
+        <filesystem/>
+    </types>
+
+    <dependencies>
+        <owncloud min-version="10.0" max-version="10.0"/>
+    </dependencies>
+    <website>https://github.com/owncloud/files_external_dropbox/</website>
+    <bugs>https://github.com/owncloud/files_external_dropbox/issues</bugs>
+    <repository type="git">https://github.com/owncloud/files_external_dropbox.git</repository>
+</info>
