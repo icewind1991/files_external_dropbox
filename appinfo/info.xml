@@ -18,9 +18,9 @@ Administrators and users (when enabled) can find external storage configuration 
     <author>Hemant Mann</author>
     <version>1.0.0</version>
     <category>storage</category>
-	<documentation>
+    <documentation>
     	<user>https://doc.owncloud.com/server/latest/user_manual/external_storage/external_storage.html?highlight=dropbox</user>
-		<admin>https://doc.owncloud.com/server/latest/admin_manual/configuration/files/external_storage/dropbox.html?highlight=dropbox</admin>
+	<admin>https://doc.owncloud.com/server/latest/admin_manual/configuration/files/external_storage/dropbox.html?highlight=dropbox</admin>
     </documentation>
     <screenshot>https://raw.githubusercontent.com/owncloud/screenshots/master/files_external_dropbox/owncloud-app-external-storage-dropbox.jpg</screenshot>
     <types>
