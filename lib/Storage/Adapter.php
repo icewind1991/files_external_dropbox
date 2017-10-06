@@ -40,8 +40,7 @@ class Adapter extends DropboxAdapter {
 	public function getModifiedFolders($items) {
 		$result = [];
 		foreach ($items as $item) {
-			$className = FolderMetadata::class;
-			if ($item instanceof $className) {
+			if ($item instanceof FolderMetadata) {
 				$dirname = $item->getPathDisplay();
 			} else {
 				$dirname = dirname($item->getPathDisplay());

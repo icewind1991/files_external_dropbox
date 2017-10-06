@@ -1,36 +1,49 @@
 <?xml version="1.0"?>
 <info>
-    <id>files_external_dropbox</id>
-    <name>External Storage: Dropbox</name>
-    <description>
-With ownCloud you can leverage storage that already exists in your enterprise. Administrators can for example decide to store the most sensitive data on-premises and less sensitive data in the cloud while making all of your files available through a single user interface and enabling compliance with your chosen security and governance policies.
-This highly facilitates data infrastructure modernization in your business without the need of data migration or major investments in new storage systems.
-Using ownCloud it is possible to integrate a wide range of storage types and make them accessible from all devices under the specified security policies in ownCloud. ownCloud works as an additional layer, providing users with a single point of access to their files on all storage locations.
+	<id>files_external_dropbox</id>
+	<name>External Storage backend for Dropbox</name>
+	<description>
+		This application enables integrating Dropbox external storages via the
+		Dropbox API v2.
+		Once a Dropbox account is integrated by an administrator or the user in
+		self-service, users see a folder structure that mirrors their Dropbox
+		hierarchy.
+		Users can then selectively sync files to their desktop or access them on
+		mobile devices like any other file in Nextcloud. The files will remain
+		in the Dropbox storage but are now accessible in a secure and fully
+		logged and traceable way through Nextcloud.
 
-This application enables integrating Dropbox external storages via the Dropbox API v2.
-Once a Dropbox account is integrated by an administrator or the user in self-service, users see a folder structure that mirrors their Dropbox hierarchy.
-Users can then selectively sync files to their desktop or access them on mobile devices like any other file in ownCloud. The files will remain in the Dropbox storage but are now accessible in a secure and fully logged and traceable way through ownCloud.
+		Administrators and users (when enabled) can find external storage
+		configuration options in the 'Storage' section of admin and user
+		settings, respectively.
+	</description>
+	<summary>Integrate Dropbox as an external storage</summary>
+	<licence>GPLv2</licence>
+	<author>Robin Appelman</author>
+	<author>Hemant Mann</author>
+	<version>1.0.0</version>
+	<category>storage</category>
+	<documentation>
+		<admin>
+			https://docs.nextcloud.com/server/12/admin_manual/configuration_files/external_storage/dropbox.html
+		</admin>
+	</documentation>
+	<screenshot>
+		https://raw.githubusercontent.com/nextcloud/files_external_dropbox/master/screenshots/nextcloud-app-external-storage-dropbox.jpg
+	</screenshot>
+	<screenshot>
+		https://raw.githubusercontent.com/nextcloud/files_external_dropbox/master/screenshots/settings.png
+	</screenshot>
+	<types>
+		<filesystem/>
+	</types>
 
-Administrators and users (when enabled) can find external storage configuration options in the 'Storage' section of admin and user settings, respectively.
-    </description>
-    <summary>Integrate Dropbox as an external storage</summary>
-    <licence>GPLv2</licence>
-    <author>Hemant Mann</author>
-    <version>1.0.0</version>
-    <category>storage</category>
-    <documentation>
-    	<user>https://doc.owncloud.com/server/latest/user_manual/external_storage/external_storage.html?highlight=dropbox</user>
-	<admin>https://doc.owncloud.com/server/latest/admin_manual/configuration/files/external_storage/dropbox.html?highlight=dropbox</admin>
-    </documentation>
-    <screenshot>https://raw.githubusercontent.com/owncloud/screenshots/master/files_external_dropbox/owncloud-app-external-storage-dropbox.jpg</screenshot>
-    <types>
-        <filesystem/>
-    </types>
-
-    <dependencies>
-        <owncloud min-version="10.0" max-version="10.0"/>
-    </dependencies>
-    <website>https://github.com/owncloud/files_external_dropbox/</website>
-    <bugs>https://github.com/owncloud/files_external_dropbox/issues</bugs>
-    <repository type="git">https://github.com/owncloud/files_external_dropbox.git</repository>
+	<dependencies>
+		<nextcloud min-version="12.0" max-version="13.0"/>
+	</dependencies>
+	<website>https://github.com/nextcloud/files_external_dropbox/</website>
+	<bugs>https://github.com/nextcloud/files_external_dropbox/issues</bugs>
+	<repository type="git">
+		https://github.com/nextcloud/files_external_dropbox.git
+	</repository>
 </info>
