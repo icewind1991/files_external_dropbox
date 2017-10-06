@@ -22,7 +22,7 @@
 	<author>Robin Appelman</author>
 	<author>Hemant Mann</author>
 	<version>1.0.0</version>
-	<category>storage</category>
+	<category>files</category>
 	<documentation>
 		<admin>
 			https://docs.nextcloud.com/server/12/admin_manual/configuration_files/external_storage/dropbox.html
