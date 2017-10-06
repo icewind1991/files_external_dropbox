@@ -25,14 +25,14 @@ namespace OCA\Files_external_dropbox\Storage;
 
 use Icewind\Streams\IteratorDirectory;
 use League\Flysystem\FileNotFoundException;
-use OCP\Files\Storage\FlysystemStorageAdapter;
+use OC\Files\Storage\Flysystem;
 
 /**
  * Generic Cacheable adapter between flysystem adapters and owncloud's storage system
  *
  * To use: subclass and call $this->buildFlysystem with the flysystem adapter of choice
  */
-abstract class CacheableFlysystemAdapter extends FlysystemStorageAdapter {
+abstract class CacheableFlysystemAdapter extends Flysystem {
 	/**
      * This property is used to check whether the storage is case insensitive or not
      * @var boolean

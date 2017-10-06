@@ -59,7 +59,7 @@ class OauthController extends Controller {
 
 	/**
 	 * Create a storage from its parameters
-	 * 
+	 *
 	 * @param string $client_id
 	 * @param string $client_secret
 	 * @param string $redirect
@@ -85,14 +85,14 @@ class OauthController extends Controller {
 			if ($step == 1) {
 				$authUrl = $authHelper->getAuthUrl($redirect);
 				return new DataResponse([
-				    'status' => 'success',
+					'status' => 'success',
 					'data' => ['url' => $authUrl]
 				]);
 			} else if ($step == 2 && isset($code)) {
 				try {
 					$accessToken = $authHelper->getAccessToken($code, null, $redirect);
 					return new DataResponse([
-					    'status' => 'success',
+						'status' => 'success',
 						'data' => ['token' => $accessToken->getToken()]
 					]);
 				} catch (\Exception $ex) {
