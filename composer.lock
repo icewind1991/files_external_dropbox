@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9102b255c1e9a9dd8ccb4ebef876a4b5",
+    "content-hash": "d1d7c2f573de8e6505200ee4f89b7382",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -500,20 +500,20 @@
         },
         {
             "name": "tightenco/collect",
-            "version": "v5.5.13",
+            "version": "v5.4.33",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tightenco/collect.git",
-                "reference": "dae85b18c6a2315645bca3dac37e3e408542efa8"
+                "reference": "73aa38b20d932f5e8f8ccf721e4c27f4304783d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tightenco/collect/zipball/dae85b18c6a2315645bca3dac37e3e408542efa8",
-                "reference": "dae85b18c6a2315645bca3dac37e3e408542efa8",
+                "url": "https://api.github.com/repos/tightenco/collect/zipball/73aa38b20d932f5e8f8ccf721e4c27f4304783d6",
+                "reference": "73aa38b20d932f5e8f8ccf721e4c27f4304783d6",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.0"
+                "php": ">=5.6.4"
             },
             "require-dev": {
                 "mockery/mockery": "~1.0",
