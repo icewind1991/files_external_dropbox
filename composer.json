@@ -11,6 +11,7 @@
     ],
     "require": {
         "kunalvarma05/dropbox-php-sdk": "dev-guzzle5",
-        "hemant-mann/flysystem-dropbox": "dev-guzzle5"
+        "hemant-mann/flysystem-dropbox": "dev-guzzle5",
+        "tightenco/collect": "v5.4.33"
     }
 }
