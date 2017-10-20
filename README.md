@@ -4,7 +4,10 @@ Flysystem based dropbox backend for Nextcloud
 Requires Nextcloud 12.0 or later
 
 ## Steps For Installation:
-- Get the app from the [app store](https://apps.nextcloud.com/)
+- ~~Get the app from the [app store](https://apps.nextcloud.com/)~~
+- Download the [source](https://github.com/icewind1991/files_external_dropbox/archive/master.zip) into the Nextcloud apps directory.
+- Run `make` or `composer install`
+- Enable the app in the web interface or by running `occ app:enable files_external_dropbox`
 - Fill up the storage details (See Below _Configuring OAuth2_)
 - Fire up the files page to see the ```Dropbox``` mounted as external storage
 
