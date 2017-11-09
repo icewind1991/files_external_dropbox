@@ -16,7 +16,7 @@ Requires Nextcloud 12.0 or later
 - Connecting Dropbox is a little more work because you have to create a Dropbox app. Log into the [Dropbox Developers](http://www.dropbox.com/developers) page and click Create Your App
 - Then choose which folders to share, or to share everything in your Dropbox.
 - Name Your App and then click Create App
-- Under the section **OAuth2** Redirect URIs add a new URL ```http://path/to/nextcloud/index.php/settings/admin/externalstorages``` _(Replace http://path/to/nextcloud/index.php with you valid Nextcloud installation path)_
+- Under the section **OAuth2** Redirect URIs add a new URL ```http://path/to/nextcloud/index.php/settings/admin/externalstorages``` and ```http://path/to/nextcloud/index.php/settings/user/externalstorages``` _(Replace http://path/to/nextcloud/index.php with you valid Nextcloud installation path)_
 - Then Go to nextcloud ```settings/admin/externalstorages``` and Add a new storage **Dropbox V2**
 - Fill the details Client Id, Client Secrets from you Dropbox App page
 - Click Grant Access and then you will be redirected for OAuth login
