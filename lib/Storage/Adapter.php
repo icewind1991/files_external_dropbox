@@ -29,7 +29,6 @@ use HemantMann\Flysystem\Dropbox\Adapter as DropboxAdapter;
 class Adapter extends DropboxAdapter {
 	protected function normalizeResponse($obj) {
 		$result = parent::normalizeResponse($obj);
-		$result['path'] = strtolower($result['path']);
 
 		if ($result['type'] === 'dir') {
 			$result['timestamp'] = 0;
