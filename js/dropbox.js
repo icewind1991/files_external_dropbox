@@ -7,9 +7,14 @@ $(document).ready(function () {
 	}
 
 	OCA.External.Settings.mountConfig.whenSelectAuthMechanism(function ($tr, authMechanism, scheme, onCompletion) {
-		console.log('dropbox');
 		if (authMechanism === 'oauth2::oauth2') {
 			var config = $tr.find('.configuration');
+			// hack to prevent conflict with oauth2 code from files_external
+			// wait for files_external to setup the config ui and then change the button
+			setTimeout(function () {
+				config.find('[name="oauth2_grant"]')
+					.attr('name', 'oauth2_grant_dropbox');
+			}, 50);
 
 			onCompletion.then(function () {
 				var configured = $tr.find('[data-parameter="configured"]');
@@ -46,7 +51,7 @@ $(document).ready(function () {
 		}
 	});
 
-	$('#externalStorage').on('click', '[name="oauth2_grant"]', function (event) {
+	$('#externalStorage').on('click', '[name="oauth2_grant_dropbox"]', function (event) {
 		event.preventDefault();
 		var tr = $(this).parent().parent();
 		var client_id = $(this).parent().find('[data-parameter="client_id"]').val();
