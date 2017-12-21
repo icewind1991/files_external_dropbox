@@ -12,6 +12,7 @@ Requires Nextcloud 12.0 or later
 - Enable the app in the web interface or by running `occ app:enable files_external_dropbox`
 - Fill up the storage details (See Below _Configuring OAuth2_)
 - Fire up the files page to see the ```Dropbox``` mounted as external storage
+- To allow any user to configure his own dropbox storage, you need to ensure that relevant checkbox is setting under "Allow users to mount external storage"
 
 ## Configuring OAuth2
 - Connecting Dropbox is a little more work because you have to create a Dropbox app. Log into the [Dropbox Developers](http://www.dropbox.com/developers) page and click Create Your App
