@@ -64,9 +64,9 @@ abstract class CacheableFlysystemAdapter extends Flysystem {
 		return $location;
 	}
 
-	public function buildPath($path) {
+	public function buildPath($path, $modifyCase = false) {
 		$location = parent::buildPath($path);
-		if ($this->isCaseInsensitiveStorage) {
+		if ($this->isCaseInsensitiveStorage && $modifyCase) {
 			$location = strtolower($location);
 		}
 		return $location;
@@ -98,7 +98,7 @@ abstract class CacheableFlysystemAdapter extends Flysystem {
 	 */
 	public function updateCache($contents) {
 		foreach ($contents as $object) {
-			$path = $object['path'];
+			$path = $this->isCaseInsensitiveStorage ? strtolower($object['path']) : $object['path'];
 			$this->cacheContents[$path] = $object;
 		}
 	}
@@ -108,7 +108,8 @@ abstract class CacheableFlysystemAdapter extends Flysystem {
 	 */
 	public function opendir($path) {
 		try {
-			$location = $this->buildPath($path);
+			// we need to preserve case to ensure the parent folder check is correct
+			$location = $this->buildPath($path, false);
 			$content = $this->flysystem->listContents($location);
 			$this->updateCache($content);
 		} catch (FileNotFoundException $e) {
