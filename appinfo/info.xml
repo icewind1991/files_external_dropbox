@@ -39,7 +39,7 @@
 	</types>
 
 	<dependencies>
-		<nextcloud min-version="12.0" max-version="13.0"/>
+		<nextcloud min-version="12.0" max-version="14.0"/>
 	</dependencies>
 	<website>https://github.com/icewind1991/files_external_dropbox/</website>
 	<bugs>https://github.com/icewind1991/files_external_dropbox/issues</bugs>
