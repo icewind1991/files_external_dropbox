@@ -20,7 +20,7 @@ Requires Nextcloud 12.0 or later
 - Name Your App and then click Create App
 - Under the section **OAuth2** Redirect URIs add a new URL ```http://path/to/nextcloud/index.php/settings/admin/externalstorages``` and ```http://path/to/nextcloud/index.php/settings/user/externalstorages``` _(Replace http://path/to/nextcloud/index.php with you valid Nextcloud installation path)_
 - Then Go to nextcloud ```settings/admin/externalstorages``` and Add a new storage **Dropbox V2**
-- Fill the details Client Id, Client Secrets from you Dropbox App page
+- Fill the details Client Id, Client Secrets from your Dropbox App page (search for "App key" and "App secret")
 - Click Grant Access and then you will be redirected for OAuth login
 - After completing the OAuth you will be redirect back to Storage Section and you should see **green** mark along your storage configuration
 - That's it
