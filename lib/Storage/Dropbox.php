@@ -25,9 +25,10 @@ namespace OCA\Files_external_dropbox\Storage;
 
 use Kunnu\Dropbox\DropboxApp;
 use Kunnu\Dropbox\Dropbox as DropboxClient;
+use OCP\Files\Storage\FlysystemStorageAdapter;
 
 
-class Dropbox extends Flysystem {
+class Dropbox extends CacheableFlysystemAdapter {
     const APP_NAME = 'files_external_dropbox';
 
     /**
