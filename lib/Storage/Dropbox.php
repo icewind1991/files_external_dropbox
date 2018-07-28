@@ -112,7 +112,7 @@ class Dropbox extends CacheableFlysystemAdapter {
      * @return string
      */
     public function getId() {
-        return 'dropbox_external::' . $this->clientId . '/' . $this->root;
+        return 'dropbox_external::' . $this->clientId . '/' . $this->accessToken;
     }
 
     public function file_exists($path) {
