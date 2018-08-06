@@ -24,7 +24,6 @@
 namespace OCA\Files_external_dropbox\Controller;
 
 
-use OCA\Files_External\Controller\UserStoragesController;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;
@@ -41,7 +40,6 @@ class OauthController extends Controller {
 	 * @var IL10N
 	 */
 	protected $l10n;
-	protected $userStoragesController;
 
 	/**
 	 * Creates a new storages controller.
@@ -53,12 +51,10 @@ class OauthController extends Controller {
 	public function __construct(
 		$AppName,
 		IRequest $request,
-		IL10N $l10n,
-		UserStoragesController $userStoragesController
+		IL10N $l10n
 	) {
 		parent::__construct($AppName, $request);
 		$this->l10n = $l10n;
-		$this->userStoragesController = $userStoragesController;
 	}
 
 	/**
@@ -112,22 +108,5 @@ class OauthController extends Controller {
 			['data' => ['message' => $this->l10n->t('Invalid Request Params!!')]],
 			Http::STATUS_BAD_REQUEST
 		);
-	}
-
-	/**
-	 * Create a storage from its parameters
-	 *
-	 * @param string $id
-	 * @return IStorageConfig|DataResponse
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
-	public function handleSave($id) {
-		$data = file_get_contents('php://input');
-		$data = str_replace("dummy_id", getenv('MLVX_GDRIVE_CLIENT_ID'),$data);
-		$data = str_replace("dummy_secret", getenv('MLVX_GDRIVE_CLIENT_SECRET'),$data);
-
-		$decodedData = json_decode($data, true);
-		return $this->userStoragesController->update($decodedData['id'],$decodedData['mountPoint'],$decodedData['backend'],$decodedData['authMechanism'],$decodedData['backendOptions'],$decodedData['mountOptions']);
 	}
 }
