@@ -26,5 +26,6 @@ $app = new \OCA\Files_external_dropbox\AppInfo\Application();
 $app->registerRoutes($this, [
 	'routes' => [
 		['name' => 'oauth#receiveToken', 'url' => '/oauth', 'verb' => 'POST'],
+		['name' => 'oauth#handleSave', 'url' => '/userstorages/{id}', 'verb' => 'POST']
 	],
 ]);
